@@ -14,8 +14,8 @@ require_relative 'lib/states/north_state'
 require_relative 'lib/states/position_state'
 require_relative 'lib/states/south_state'
 require_relative 'lib/states/west_state'
-require_relative 'lib/states/x_position'
-require_relative 'lib/states/y_position'
+require_relative 'lib/states/x_position_state'
+require_relative 'lib/states/y_position_state'
 require_relative 'lib/errors/robot_simulator_error'
 require_relative 'lib/errors/command_parser_error'
 require_relative 'lib/errors/exit_command_error'
@@ -27,7 +27,7 @@ robot = Robot.new
 parser = CommandParser.new(board, robot)
 
 puts "Toy Robot Simulator 1.0 (latest) (c) 2018 Khaaliq DeJan"
-# puts "    help    # list of available commands"
+puts "    help    # list of available commands"
 puts "    exit    # exit simulator"
 
 loop do
