@@ -1,13 +1,10 @@
 # Toy Robot Simulator
 
-[![Code Climate](https://codeclimate.com/github/RafaelChefe/toy_robot/badges/gpa.svg)](https://codeclimate.com/github/RafaelChefe/toy_robot)
-
 ## Table of contents:
 
 * [Description](./README.md#description)
+  * [Task](./README.md#task)
   * [Constraints](./README.md#constraints)
-  * [Example Input and Output](./README.md#example-input-and-output)
-  * [Deliverables](./README.md#deliverables)
 * [Setup](./README.md#setup)
 * [Running the app](./README.md#running-the-app)
 * [Running the tests](./README.md#running-the-tests)
@@ -16,13 +13,19 @@
 
 ## Description
 
-* The application is a simulation of a toy robot moving on a square tabletop, of dimensions 5 units x 5 units.
-
+* The application is a simulation of a toy robot moving
+on a square tabletop, of dimensions 5 units x 5 units.
 * There are no other obstructions on the table surface.
+* The robot is free to roam around the surface of the table,
+but must be prevented from falling to destruction.
+Any movement that would result in the robot falling
+from the table must be prevented, however further
+valid movement commands must still be allowed.
 
-* The robot is free to roam around the surface of the table, but must be prevented from falling to destruction. Any movement that would result in the robot falling from the table must be prevented, however further valid movement commands must still be allowed.
+## Task
 
 Create an application that can read in commands of the following form:
+
 ```
 PLACE X,Y,F
 MOVE
@@ -31,73 +34,75 @@ RIGHT
 REPORT
 ```
 
-* `PLACE` will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
+* `PLACE` will put the toy robot on the table in position X,Y
+and facing `NORTH`, `SOUTH`, `EAST` or `WEST`.
+* The origin (0,0) can be considered to be the `SOUTH WEST` most corner.
+* The first valid command to the robot is a `PLACE` command,
+after that, any sequence of commands may be issued, in any order,
+including another `PLACE` command.
+The application should discard all commands in the sequence
+until a valid `PLACE `command has been executed.
+* `MOVE` will move the toy robot one unit forward
+in the direction it is currently facing.
+* `LEFT` and `RIGHT` will rotate the robot 90 degrees
+in the specified direction
+without changing the position of the robot.
+* `REPORT` will announce the X,Y and F of the robot.
+This can be in any form, but standard output is sufficient.
 
-* The origin (0,0) can be considered to be the SOUTH WEST most corner.
-
-* The first valid command to the robot is a `PLACE` command, after that, any sequence of commands may be issued, in any order, including another `PLACE` command. The application should discard all commands in the sequence until a valid `PLACE` command has been executed
-
-* `MOVE` will move the toy robot one unit forward in the direction it is currently facing.
-
-* `LEFT` and `RIGHT` will rotate the robot 90 degrees in the specified direction without changing the position of the robot.
-
-* `REPORT` will announce the X,Y and F of the robot. This can be in any form, but standard output is sufficient.
-
-* A robot that is not on the table can choose to ignore the `MOVE`, `LEFT`, `RIGHT` and `REPORT` commands.
-
+* A robot that is not on the table can choose
+to ignore the `MOVE`, `LEFT`, `RIGHT` and `REPORT` commands.
 * Input can be from a file, or from standard input, as the developer chooses.
-
 * Provide test data to exercise the application.
+* It is not required to provide any graphical output
+showing the movement of the toy robot.
 
-### Constraints
+Please provide your source code, and any test code/data you using in developing your solution.
 
-* The toy robot must not fall off the table during movement. This also includes the initial placement of the toy robot.
+Please send your submission to us via email as a zip file or as a link to the repository hosting your code. (If you choose to keep your repository private, contact us about adding us to your repository as collaborators.) Do not create a pull request against this repository.
 
-* Any move that would cause the robot to fall must be ignored.
+Please engineer your solution to a standard you consider suitable for production.
 
-### Example Input and Output:
+## Constraints
 
-#### Example a
+The toy robot must not fall off the table during movement.
+This also includes the initial placement of the toy robot.
+Any move that would cause the robot to fall must be ignored.
 
-    PLACE 0,0,NORTH
-    MOVE
-    REPORT
+Example Input and Output:
 
-Expected output:
+```
+# Example a
+PLACE 0,0,NORTH
+MOVE
+REPORT
+# Output: 0,1,NORTH
+```
 
-    0,1,NORTH
 
-#### Example b
+```
+# Example b
+PLACE 0,0,NORTH
+LEFT
+REPORT
+# Output: 0,0,WEST
+```
 
-    PLACE 0,0,NORTH
-    LEFT
-    REPORT
 
-Expected output:
+```
+# Example c
+PLACE 1,2,EAST
+MOVE
+MOVE
+LEFT
+MOVE
+REPORT
+# Output: 3,3,NORTH
+```
 
-    0,0,WEST
+## Acknowledgement
 
-#### Example c
-
-    PLACE 1,2,EAST
-    MOVE
-    MOVE
-    LEFT
-    MOVE
-    REPORT
-
-Expected output
-
-    3,3,NORTH
-
-### Deliverables
-
-Please provide your source code, and any test code/data you using in
-developing your solution.
-
-Please engineer your solution to a standard you consider suitable for
-production. It is not required to provide any graphical output showing the
-movement of the toy robot.
+The Toy Robot Challenge was originally formulated by [Jon Eaves](https://twitter.com/joneaves)
 
 ## Setup
 
@@ -109,30 +114,28 @@ movement of the toy robot.
 
 3. Clone this repo:
 
-    ```git clone git@github.com:RafaelChefe/toy_robot.git```
+    ```git clone git@github.com:MisterDeejay/toy-robot.git```
 
 4. Change to the app directory:
 
-    ```cd toy_robot```
+    ```cd toy-robot```
 
 5. Install dependencies:
 
     ```bundle install```
 
-And you're ready to go!
+You should be good to go from here on out!
 
 ### Running the app:
 ```ruby main.rb```
 
 ### Running the tests:
-```bundle exec rspec```
+```bundle exec rspec spec/```
 
 ### Considerations about the development:
 
-* Since the application is about a robot that receives and executes commands, it made perfect sense to use the [Command Pattern](https://en.wikipedia.org/wiki/Command_pattern) to implement it. It also makes it very easy to add new commands as needed, like a `TELEPORT` command, that would teleport the robot to a random place on the table.
+* Since the application is about a robot that receives and executes commands, it was implemented using the Command Behavioral Pattern seen in <sup>1</sup>. It also makes it very easy to add new commands, like a `UP/DOWN` commands, that would allow the robot to use its newly upgraded jetpack.
 
-* The table is passed along to the commands when needed, and it's responsible for checking if a position is valid or not. If we need, say, a flying robot that moves in a three-dimensional space instead of a 2D table, it would be easy to implement it.
+* The State Behavioral Pattern<sup>2</sup> was used to decouple the state from the robot and to allow for run-time changes in the robot's behavior. So for example, when the robot is facing North, it will move +1 in the y-direction and -1 when facing South. It also gives us the flexibility to add a new z-state position to easily track our robot now that he is able to use his jetpack.
 
-* The Commander class takes a string, parses it and return the appropriate command. The command string can come from anywhere. As it is, the commands are read from the stdinput, but the same class could be used to read commands from a text file, or from web API.
-
-* Considering using the Decorator Pattern to implement move north, move south, etc.
+<sup>1, 2</sup> [Design Patterns (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides)](https://en.wikipedia.org/wiki/Design_Patterns)
