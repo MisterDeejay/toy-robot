@@ -9,6 +9,7 @@ require_relative 'lib/commands/move_command'
 require_relative 'lib/commands/place_command'
 require_relative 'lib/commands/report_command'
 require_relative 'lib/commands/right_command'
+require_relative 'lib/commands/help_command'
 require_relative 'lib/states/east_state'
 require_relative 'lib/states/north_state'
 require_relative 'lib/states/position_state'
@@ -27,6 +28,15 @@ robot = Robot.new
 parser = CommandParser.new(board, robot)
 
 puts "Toy Robot Simulator 1.0 (latest) (c) 2018 Khaaliq DeJan"
+puts "This simulator places a robot on a 5x5 sized table."
+puts "To begin moving the robot, you must first place it"
+puts "in a direction (north, south, each or west)within the"
+puts "confines of the table. An example of a correct placement"
+puts "would look like PLACE 3,3,NORTH because the robot in placed"
+puts "within the 5x5 grid and facing north. An example of an"
+puts "incorrect placement would be PLACE 6,2 because you are "
+puts "attempting to place the robot on a table with a width "
+puts "longer (6) than the given width of the table (5)."
 puts "    help    # list of available commands"
 puts "    exit    # exit simulator"
 
