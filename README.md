@@ -8,8 +8,7 @@
 * [Setup](./README.md#setup)
 * [Running the app](./README.md#running-the-app)
 * [Running the tests](./README.md#running-the-tests)
-* [Considerations about the development](./README.md#considerations-about-the-development)
-* [Examples of use](./test_data/test_data.txt)
+* [Development notes](./README.md#development-notes)
 
 ## Description
 
@@ -132,7 +131,7 @@ You should be good to go from here on out!
 ### Running the tests:
 ```bundle exec rspec spec/```
 
-### Considerations about the development:
+### Development notes:
 
 * Since the application is about a robot that receives and executes commands, it was implemented using the Command Behavioral Pattern seen in <sup>1</sup>. It also makes it very easy to add new commands, like a `UP/DOWN` commands, that would allow the robot to use its newly upgraded jetpack.
 
