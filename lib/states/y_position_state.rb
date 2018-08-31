@@ -1,0 +1,2 @@
+class YPositionState < PositionState
+end

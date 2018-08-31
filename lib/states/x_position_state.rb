@@ -1,0 +1,2 @@
+class XPositionState < PositionState
+end
