@@ -137,4 +137,6 @@ You should be good to go from here on out!
 
 * The State Behavioral Pattern<sup>2</sup> was used to decouple the state from the robot and to allow for run-time changes in the robot's behavior. So for example, when the robot is facing North, it will move +1 in the y-direction and -1 when facing South. It also gives us the flexibility to add a new z-state position to easily track our robot now that he is able to use his jetpack.
 
-<sup>1, 2</sup> [Design Patterns (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides)](https://en.wikipedia.org/wiki/Design_Patterns)
+* Consider using the Factory Design Pattern<sup>3</sup> to create Commands. This would remove the responsibility from the CommandParser so it no longer has to anticipate what class of object it must create and can stricly be responsibile for parsing the command and then hadning off the command creation to the correct factory class.
+
+<sup>1, 2, 3</sup> [Design Patterns (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides)](https://en.wikipedia.org/wiki/Design_Patterns)
